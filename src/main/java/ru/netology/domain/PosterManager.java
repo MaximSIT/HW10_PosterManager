@@ -1,42 +1,29 @@
 package ru.netology.domain;
 
 public class PosterManager {
-    private int maxLimit;
+    private PosterRepository repo;
 
-    public PosterManager() {
-        maxLimit = 10;
+    public PosterManager(PosterRepository repo) {
+        this.repo = repo;
     }
 
-    public PosterManager(int newMaxLimit) {
-        maxLimit = newMaxLimit;
-    }
-
-    private Poster[] listOfFilms = new Poster[0];
-
-    public void addFilm(Poster film) {
-        Poster[] tmp = new Poster[listOfFilms.length + 1];
-        for (int i = 0; i < listOfFilms.length; i++) {
-            tmp[i] = listOfFilms[i];
-        }
-        tmp[tmp.length - 1] = film;
-        listOfFilms = tmp;
+    public void save(Poster film) {
+        repo.save(film);
     }
 
     public Poster[] findAll() {
-        return listOfFilms;
+        return repo.findAll();
     }
 
-    public Poster[] findLast() {
-        int resultLength;
-        if (listOfFilms.length <= maxLimit) {
-            resultLength = listOfFilms.length;
-        } else {
-            resultLength = maxLimit;
-        }
-        Poster[] lastReversed = new Poster[resultLength];
-        for (int i = 0; i < lastReversed.length; i++) {
-            lastReversed[i] = listOfFilms[listOfFilms.length - 1 - i];
-        }
-        return lastReversed;
+    public Poster findById(int id) {
+        return repo.findById(id);
+    }
+
+    public void removeById(int id) {
+        repo.removeById(id);
+    }
+
+    public void removeAll() {
+        repo.removeAll();
     }
 }
