@@ -7,4 +7,8 @@ public class Poster {
     private int id;
     private String Name;
     private String genre;
+
+    public int getId() {
+        return id;
+    }
 }
